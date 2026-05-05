@@ -16,6 +16,11 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ramazan Yavuz - Public projects">
 <meta name="twitter:description" content="Open-source projects by Ramazan Yavuz. Linux tools, general utilities, libraries.">
+<meta property="og:image" content="https://ra-yavuz.github.io/main-icon.png">
+<meta name="twitter:image" content="https://ra-yavuz.github.io/main-icon.png">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <style>
   :root {
     --fg: #1a1a1a;
@@ -67,6 +72,10 @@
   }
   main { max-width: 760px; margin: 0 auto; padding: 56px 24px 96px; }
   header { margin-bottom: 32px; }
+  .hero { display: flex; align-items: flex-start; gap: 22px; flex-wrap: wrap; }
+  .hero .text { flex: 1 1 320px; min-width: 0; }
+  .hero .avatar { width: 132px; height: 132px; flex: 0 0 auto; }
+  @media (prefers-color-scheme: dark) { .hero .avatar, .project .card-logo { filter: invert(1); } }
   h1 { font-size: 1.8rem; margin: 0 0 4px; letter-spacing: -0.005em; }
   header p.role { color: var(--muted); margin: 0 0 14px; font-size: 1rem; }
   header p.intro { margin: 0 0 8px; max-width: 60ch; }
@@ -121,6 +130,9 @@
   .project header.row {
     display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
     margin: 0 0 4px;
+  }
+  .project .card-logo {
+    width: 36px; height: 36px; flex: 0 0 auto; display: block;
   }
   .project h3 {
     margin: 0; font-size: 1rem;
@@ -186,18 +198,23 @@
 <body>
 <main>
   <header>
-    <h1>Ramazan Yavuz</h1>
-    <p class="role">Public projects, independent of any business work.</p>
-    <p class="intro">
-      This is my personal hub for open-source projects I publish on
-      <a href="https://github.com/ra-yavuz">github.com/ra-yavuz</a>.
-      Anything here is something I built, found useful, and decided to share.
-      It is not connected to client work or commercial offerings.
-    </p>
-    <p class="note">
-      For consulting, the broader portfolio, and articles, see
-      <a href="https://ramazan-yavuz.tr">ramazan-yavuz.tr</a>.
-    </p>
+    <div class="hero">
+      <div class="text">
+        <h1>Ramazan Yavuz</h1>
+        <p class="role">Public projects, independent of any business work.</p>
+        <p class="intro">
+          This is my personal hub for open-source projects I publish on
+          <a href="https://github.com/ra-yavuz">github.com/ra-yavuz</a>.
+          Anything here is something I built, found useful, and decided to share.
+          It is not connected to client work or commercial offerings.
+        </p>
+        <p class="note">
+          For consulting, the broader portfolio, and articles, see
+          <a href="https://ramazan-yavuz.tr">ramazan-yavuz.tr</a>.
+        </p>
+      </div>
+      <img class="avatar" src="main-icon.png" alt="Stylized illustration of Ramazan Yavuz at a laptop" width="132" height="132">
+    </div>
   </header>
 
   <h2>Projects</h2>
@@ -213,6 +230,7 @@
   <div class="projects" id="projects">
     <article class="project" data-categories="general cli linux">
       <header class="row">
+        <img class="card-logo" src="logo-hydra-llm.png" alt="" width="36" height="36">
         <h3>hydra-llm</h3>
         <span class="badges">
           <span class="badge badge-general">General</span>
@@ -236,6 +254,7 @@
     </article>
     <article class="project" data-categories="linux cli">
       <header class="row">
+        <img class="card-logo" src="logo-inhibit-charge.png" alt="" width="36" height="36">
         <h3>inhibit-charge</h3>
         <span class="badges">
           <span class="badge badge-linux">Linux</span>
@@ -257,6 +276,7 @@
 
     <article class="project" data-categories="linux cli">
       <header class="row">
+        <img class="card-logo" src="logo-herald.png" alt="" width="36" height="36">
         <h3>herald</h3>
         <span class="badges">
           <span class="badge badge-linux">Linux</span>
@@ -278,6 +298,7 @@
 
     <article class="project" data-categories="linux cli general">
       <header class="row">
+        <img class="card-logo" src="logo-meowtrics.png" alt="" width="36" height="36">
         <h3>meowtrics</h3>
         <span class="badges">
           <span class="badge badge-linux">Linux</span>
