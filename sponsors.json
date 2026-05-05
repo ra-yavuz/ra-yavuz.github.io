@@ -1,4 +1,4 @@
 {
   "_comment": "Set active=true once GitHub Sponsors approves the ra-yavuz profile. The hub page reads this on load and reveals the Support section when active.",
-  "active": false
+  "active": true
 }
