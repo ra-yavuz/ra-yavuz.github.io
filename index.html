@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ra-yavuz</title>
+<meta name="description" content="Linux tools and software projects by ra-yavuz.">
+<style>
+  :root {
+    --fg: #1a1a1a;
+    --muted: #5e5e5e;
+    --bg: #f4f1ec;
+    --card: #ffffff;
+    --line: #d8d4cc;
+    --code-bg: #ebe7e0;
+    --link: #0a4ca8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fg: #ececec;
+      --muted: #9a9a9a;
+      --bg: #1c1d20;
+      --card: #25272b;
+      --line: #353941;
+      --code-bg: #14151a;
+      --link: #7cb0ff;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--fg); background: var(--bg);
+    line-height: 1.55;
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 56px 24px 96px; }
+  header { margin-bottom: 32px; }
+  h1 { font-size: 1.7rem; margin: 0 0 4px; letter-spacing: -0.005em; }
+  header p { color: var(--muted); margin: 0; }
+  h2 { font-size: 1.05rem; margin: 36px 0 12px; letter-spacing: 0.02em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  a { color: var(--link); }
+  code { background: var(--code-bg); padding: 1px 5px; border-radius: 3px; font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace; font-size: 0.9em; }
+  .projects { display: grid; gap: 12px; }
+  .project {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+  .project h3 { margin: 0 0 4px; font-size: 1rem; font-family: ui-monospace, monospace; }
+  .project p { margin: 0 0 6px; color: var(--muted); font-size: 0.94rem; }
+  .project .links a { font-size: 0.88rem; margin-right: 12px; }
+  .links-row a { margin-right: 14px; font-size: 0.95rem; }
+  footer { margin-top: 56px; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--line); padding-top: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>ra-yavuz</h1>
+    <p>Linux tools and software projects.</p>
+  </header>
+
+  <h2>Projects</h2>
+  <div class="projects">
+    <div class="project">
+      <h3>inhibit-charge</h3>
+      <p>Park your Linux laptop battery at a target charge level using the kernel's <code>inhibit-charge</code> mode. No trickle cycling, no slow drift.</p>
+      <div class="links">
+        <a href="https://github.com/ra-yavuz/inhibit-charge">source</a>
+        <a href="https://github.com/ra-yavuz/inhibit-charge/releases">releases</a>
+      </div>
+    </div>
+  </div>
+
+  <h2>Apt repository</h2>
+  <p>All Debian/Ubuntu packages are published to a single signed apt archive.</p>
+  <div class="links-row">
+    <a href="https://ra-yavuz.github.io/apt/">apt repository</a>
+    <a href="https://github.com/ra-yavuz/apt">apt source repo</a>
+  </div>
+
+  <h2>Elsewhere</h2>
+  <div class="links-row">
+    <a href="https://github.com/ra-yavuz">github.com/ra-yavuz</a>
+  </div>
+
+  <footer>
+    Source for this page: <a href="https://github.com/ra-yavuz/ra-yavuz.github.io">github.com/ra-yavuz/ra-yavuz.github.io</a>
+  </footer>
+</main>
+</body>
+</html>
