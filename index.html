@@ -75,7 +75,7 @@
   .hero { display: flex; align-items: flex-start; gap: 22px; flex-wrap: wrap; }
   .hero .text { flex: 1 1 320px; min-width: 0; }
   .hero .avatar { width: 132px; height: 132px; flex: 0 0 auto; }
-  @media (prefers-color-scheme: dark) { .hero .avatar, .project .card-logo { filter: invert(1); } }
+  @media (prefers-color-scheme: dark) { .hero .avatar { filter: invert(1); } }
   h1 { font-size: 1.8rem; margin: 0 0 4px; letter-spacing: -0.005em; }
   header p.role { color: var(--muted); margin: 0 0 14px; font-size: 1rem; }
   header p.intro { margin: 0 0 8px; max-width: 60ch; }
@@ -121,19 +121,29 @@
     border-radius: 6px;
     padding: 14px 16px;
     transition: border-color 120ms ease, transform 120ms ease;
+    display: flex; align-items: stretch; gap: 16px;
   }
   .project:hover {
     border-color: var(--link);
     transform: translateY(-1px);
   }
   .project.hidden { display: none; }
+  .project .body { flex: 1 1 auto; min-width: 0; }
+  .project .card-art {
+    flex: 0 0 auto;
+    width: 130px;
+    align-self: stretch;
+    object-fit: contain;
+    object-position: center;
+  }
+  @media (prefers-color-scheme: dark) { .project .card-art { filter: invert(1); } }
+  @media (max-width: 540px) {
+    .project { flex-direction: column-reverse; gap: 10px; }
+    .project .card-art { width: 100%; max-height: 120px; }
+  }
   .project header.row {
     display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
     margin: 0 0 4px;
-  }
-  .project .card-logo {
-    width: 44px; height: 44px; flex: 0 0 auto; display: block;
-    object-fit: contain;
   }
   .project h3 {
     margin: 0; font-size: 1rem;
@@ -230,95 +240,103 @@
 
   <div class="projects" id="projects">
     <article class="project" data-categories="general cli linux">
-      <header class="row">
-        <img class="card-logo" src="logo-hydra-llm.png" alt="" width="36" height="36">
-        <h3>hydra-llm</h3>
-        <span class="badges">
-          <span class="badge badge-general">General</span>
-          <span class="badge badge-cli">CLI</span>
-          <span class="badge badge-linux">Linux</span>
-        </span>
-      </header>
-      <p>
-        Run local LLMs the easy way. Single-binary CLI that wraps llama.cpp in
-        Docker, with a curated catalog of community-quantised GGUFs that download
-        anonymously, hardware-aware model recommendations, persistent chat sessions,
-        and an optional KDE Plasma 6 panel widget.
-        No telemetry, no cloud, no API key.
-      </p>
-      <div class="links">
-        <a href="https://ra-yavuz.github.io/hydra-llm/">project page</a>
-        <a href="https://github.com/ra-yavuz/hydra-llm">source</a>
-        <a href="https://github.com/ra-yavuz/hydra-llm/releases">releases</a>
-        <a href="https://github.com/ra-yavuz/hydra-llm#install">install</a>
+      <div class="body">
+        <header class="row">
+          <h3>hydra-llm</h3>
+          <span class="badges">
+            <span class="badge badge-general">General</span>
+            <span class="badge badge-cli">CLI</span>
+            <span class="badge badge-linux">Linux</span>
+          </span>
+        </header>
+        <p>
+          Run local LLMs the easy way. Single-binary CLI that wraps llama.cpp in
+          Docker, with a curated catalog of community-quantised GGUFs that download
+          anonymously, hardware-aware model recommendations, persistent chat sessions,
+          and an optional KDE Plasma 6 panel widget.
+          No telemetry, no cloud, no API key.
+        </p>
+        <div class="links">
+          <a href="https://ra-yavuz.github.io/hydra-llm/">project page</a>
+          <a href="https://github.com/ra-yavuz/hydra-llm">source</a>
+          <a href="https://github.com/ra-yavuz/hydra-llm/releases">releases</a>
+          <a href="https://github.com/ra-yavuz/hydra-llm#install">install</a>
+        </div>
       </div>
+      <img class="card-art" src="logo-hydra-llm.png" alt="hydra-llm logo">
     </article>
     <article class="project" data-categories="linux cli">
-      <header class="row">
-        <img class="card-logo" src="logo-inhibit-charge.png" alt="" width="36" height="36">
-        <h3>inhibit-charge</h3>
-        <span class="badges">
-          <span class="badge badge-linux">Linux</span>
-          <span class="badge badge-cli">CLI</span>
-        </span>
-      </header>
-      <p>
-        Park your Linux laptop battery at a target charge level using the kernel's
-        <code>inhibit-charge</code> mode. Unlike threshold-only tools (TLP, GNOME, KDE),
-        the battery does not trickle-cycle on AC. No slow drift, no repeated mini-cycles.
-      </p>
-      <div class="links">
-        <a href="https://ra-yavuz.github.io/inhibit-charge/">project page</a>
-        <a href="https://github.com/ra-yavuz/inhibit-charge">source</a>
-        <a href="https://github.com/ra-yavuz/inhibit-charge/releases">releases</a>
-        <a href="https://github.com/ra-yavuz/inhibit-charge#install">install</a>
+      <div class="body">
+        <header class="row">
+          <h3>inhibit-charge</h3>
+          <span class="badges">
+            <span class="badge badge-linux">Linux</span>
+            <span class="badge badge-cli">CLI</span>
+          </span>
+        </header>
+        <p>
+          Park your Linux laptop battery at a target charge level using the kernel's
+          <code>inhibit-charge</code> mode. Unlike threshold-only tools (TLP, GNOME, KDE),
+          the battery does not trickle-cycle on AC. No slow drift, no repeated mini-cycles.
+        </p>
+        <div class="links">
+          <a href="https://ra-yavuz.github.io/inhibit-charge/">project page</a>
+          <a href="https://github.com/ra-yavuz/inhibit-charge">source</a>
+          <a href="https://github.com/ra-yavuz/inhibit-charge/releases">releases</a>
+          <a href="https://github.com/ra-yavuz/inhibit-charge#install">install</a>
+        </div>
       </div>
+      <img class="card-art" src="logo-inhibit-charge.png" alt="inhibit-charge logo">
     </article>
 
     <article class="project" data-categories="linux cli">
-      <header class="row">
-        <img class="card-logo" src="logo-herald.png" alt="" width="36" height="36">
-        <h3>herald</h3>
-        <span class="badges">
-          <span class="badge badge-linux">Linux</span>
-          <span class="badge badge-cli">CLI</span>
-        </span>
-      </header>
-      <p>
-        A small Linux daemon and CLI that prints a daily quote at the top of every new
-        terminal and at login. Cached quote refreshed on a configurable timer (default
-        every 3 hours), local fallback pool, optional user prefix.
-      </p>
-      <div class="links">
-        <a href="https://ra-yavuz.github.io/herald/">project page</a>
-        <a href="https://github.com/ra-yavuz/herald">source</a>
-        <a href="https://github.com/ra-yavuz/herald/releases">releases</a>
-        <a href="https://github.com/ra-yavuz/herald#quick-install-debian--ubuntu">install</a>
+      <div class="body">
+        <header class="row">
+          <h3>herald</h3>
+          <span class="badges">
+            <span class="badge badge-linux">Linux</span>
+            <span class="badge badge-cli">CLI</span>
+          </span>
+        </header>
+        <p>
+          A small Linux daemon and CLI that prints a daily quote at the top of every new
+          terminal and at login. Cached quote refreshed on a configurable timer (default
+          every 3 hours), local fallback pool, optional user prefix.
+        </p>
+        <div class="links">
+          <a href="https://ra-yavuz.github.io/herald/">project page</a>
+          <a href="https://github.com/ra-yavuz/herald">source</a>
+          <a href="https://github.com/ra-yavuz/herald/releases">releases</a>
+          <a href="https://github.com/ra-yavuz/herald#quick-install-debian--ubuntu">install</a>
+        </div>
       </div>
+      <img class="card-art" src="logo-herald.png" alt="herald logo">
     </article>
 
     <article class="project" data-categories="linux cli general">
-      <header class="row">
-        <img class="card-logo" src="logo-meowtrics.png" alt="" width="36" height="36">
-        <h3>meowtrics</h3>
-        <span class="badges">
-          <span class="badge badge-linux">Linux</span>
-          <span class="badge badge-cli">CLI</span>
-          <span class="badge badge-general">General</span>
-        </span>
-      </header>
-      <p>
-        A small animated emoji that lives in your system tray and gossips about your
-        machine. Cat-shaped by default, sweats when the CPU is hot, naps when you're
-        idle. KDE Plasma 6 plasmoid, GNOME / XFCE / Cinnamon / Budgie / MATE / LXQt
-        via StatusNotifierItem, Sway / i3 / polybar via JSON output.
-      </p>
-      <div class="links">
-        <a href="https://ra-yavuz.github.io/meowtrics/">project page</a>
-        <a href="https://github.com/ra-yavuz/meowtrics">source</a>
-        <a href="https://github.com/ra-yavuz/meowtrics/releases">releases</a>
-        <a href="https://ra-yavuz.github.io/meowtrics/#install-quick">install</a>
+      <div class="body">
+        <header class="row">
+          <h3>meowtrics</h3>
+          <span class="badges">
+            <span class="badge badge-linux">Linux</span>
+            <span class="badge badge-cli">CLI</span>
+            <span class="badge badge-general">General</span>
+          </span>
+        </header>
+        <p>
+          A small animated emoji that lives in your system tray and gossips about your
+          machine. Cat-shaped by default, sweats when the CPU is hot, naps when you're
+          idle. KDE Plasma 6 plasmoid, GNOME / XFCE / Cinnamon / Budgie / MATE / LXQt
+          via StatusNotifierItem, Sway / i3 / polybar via JSON output.
+        </p>
+        <div class="links">
+          <a href="https://ra-yavuz.github.io/meowtrics/">project page</a>
+          <a href="https://github.com/ra-yavuz/meowtrics">source</a>
+          <a href="https://github.com/ra-yavuz/meowtrics/releases">releases</a>
+          <a href="https://ra-yavuz.github.io/meowtrics/#install-quick">install</a>
+        </div>
       </div>
+      <img class="card-art" src="logo-meowtrics.png" alt="meowtrics logo">
     </article>
   </div>
   <p class="empty" id="empty" hidden>No projects in this category yet.</p>
