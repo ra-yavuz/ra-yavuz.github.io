@@ -261,6 +261,18 @@
     </div>
   </section>
 
+  <section id="sponsor-section" hidden>
+    <h2>Support</h2>
+    <p>
+      If any of the projects here have been useful to you and you would
+      like to chip in, GitHub Sponsors is the cleanest way: zero platform
+      fee, recurring or one-off, fully optional.
+    </p>
+    <div class="links-row">
+      <a href="https://github.com/sponsors/ra-yavuz">github.com/sponsors/ra-yavuz</a>
+    </div>
+  </section>
+
   <h2>About</h2>
   <ul class="bio">
     <li>Independent engineer based between Arnsberg, Germany and Antalya, Turkey.</li>
@@ -333,6 +345,22 @@
 
     setCounts();
     applyFilter('all');
+  })();
+
+  // Reveal the "Support" section once GitHub Sponsors is actually
+  // approved and live. We can't reliably auto-detect this from the
+  // browser (CORS blocks the most direct probes; shields.io reports 0
+  // even for unapproved profiles). So we read a tiny static JSON flag
+  // that gets flipped manually the moment the approval email arrives.
+  (function () {
+    var section = document.getElementById('sponsor-section');
+    if (!section) return;
+    fetch('sponsors.json', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (cfg) {
+        if (cfg && cfg.active === true) section.hidden = false;
+      })
+      .catch(function () { /* leave hidden */ });
   })();
 </script>
 </body>
