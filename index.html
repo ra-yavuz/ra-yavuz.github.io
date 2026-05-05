@@ -3,8 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ra-yavuz</title>
-<meta name="description" content="Linux tools and software projects by ra-yavuz.">
+<title>Ramazan Yavuz - Public projects</title>
+<meta name="description" content="Public projects by Ramazan Yavuz. Independent of any business work. Includes Linux tools, general utilities, libraries, and a signed Debian apt repository.">
+<meta name="author" content="Ramazan Yavuz">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://ra-yavuz.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ramazan Yavuz - Public projects">
+<meta property="og:description" content="Open-source projects by Ramazan Yavuz. Linux tools, general utilities, libraries, signed Debian apt repository.">
+<meta property="og:url" content="https://ra-yavuz.github.io/">
+<meta property="og:site_name" content="ra-yavuz">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ramazan Yavuz - Public projects">
+<meta name="twitter:description" content="Open-source projects by Ramazan Yavuz. Linux tools, general utilities, libraries.">
 <style>
   :root {
     --fg: #1a1a1a;
@@ -14,6 +25,19 @@
     --line: #d8d4cc;
     --code-bg: #ebe7e0;
     --link: #0a4ca8;
+    --apt-bg: #eef2f8;
+    --warn-bg: #fff7d6;
+    --warn-fg: #5a4500;
+    --warn-line: #e8d36b;
+    --chip-bg: #ebe7e0;
+    --chip-active-bg: #1a1a1a;
+    --chip-active-fg: #f4f1ec;
+    --badge-fg: #ffffff;
+    --badge-linux: #2b6cb0;
+    --badge-general: #2f855a;
+    --badge-library: #6b46c1;
+    --badge-web: #c05621;
+    --badge-cli: #2c5282;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -24,6 +48,14 @@
       --line: #353941;
       --code-bg: #14151a;
       --link: #7cb0ff;
+      --apt-bg: #1f242d;
+      --warn-bg: #3a2e00;
+      --warn-fg: #f6e2a4;
+      --warn-line: #6a5500;
+      --chip-bg: #2d3036;
+      --chip-active-bg: #ececec;
+      --chip-active-fg: #1c1d20;
+      --badge-fg: #ffffff;
     }
   }
   * { box-sizing: border-box; }
@@ -33,61 +65,275 @@
     color: var(--fg); background: var(--bg);
     line-height: 1.55;
   }
-  main { max-width: 720px; margin: 0 auto; padding: 56px 24px 96px; }
+  main { max-width: 760px; margin: 0 auto; padding: 56px 24px 96px; }
   header { margin-bottom: 32px; }
-  h1 { font-size: 1.7rem; margin: 0 0 4px; letter-spacing: -0.005em; }
-  header p { color: var(--muted); margin: 0; }
-  h2 { font-size: 1.05rem; margin: 36px 0 12px; letter-spacing: 0.02em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-  a { color: var(--link); }
-  code { background: var(--code-bg); padding: 1px 5px; border-radius: 3px; font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace; font-size: 0.9em; }
+  h1 { font-size: 1.8rem; margin: 0 0 4px; letter-spacing: -0.005em; }
+  header p.role { color: var(--muted); margin: 0 0 14px; font-size: 1rem; }
+  header p.intro { margin: 0 0 8px; max-width: 60ch; }
+  header p.note { color: var(--muted); margin: 0; font-size: 0.92rem; max-width: 60ch; }
+  h2 {
+    font-size: 1rem; margin: 40px 0 12px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600;
+  }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    background: var(--code-bg); padding: 1px 5px; border-radius: 3px;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+    font-size: 0.9em;
+  }
+
+  /* Filter chips */
+  .filter {
+    display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px;
+  }
+  .filter button {
+    background: var(--chip-bg); color: var(--fg);
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 4px 12px; font-size: 0.86rem; font-family: inherit;
+    cursor: pointer; transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+  }
+  .filter button:hover { border-color: var(--link); }
+  .filter button.active {
+    background: var(--chip-active-bg); color: var(--chip-active-fg);
+    border-color: var(--chip-active-bg);
+  }
+  .filter button .count {
+    color: var(--muted); margin-left: 4px; font-size: 0.78rem;
+  }
+  .filter button.active .count { color: var(--chip-active-fg); opacity: 0.7; }
+
+  /* Project cards */
   .projects { display: grid; gap: 12px; }
   .project {
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: 6px;
     padding: 14px 16px;
+    transition: border-color 120ms ease, transform 120ms ease;
   }
-  .project h3 { margin: 0 0 4px; font-size: 1rem; font-family: ui-monospace, monospace; }
-  .project p { margin: 0 0 6px; color: var(--muted); font-size: 0.94rem; }
+  .project:hover {
+    border-color: var(--link);
+    transform: translateY(-1px);
+  }
+  .project.hidden { display: none; }
+  .project header.row {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    margin: 0 0 4px;
+  }
+  .project h3 {
+    margin: 0; font-size: 1rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .badges { display: inline-flex; gap: 4px; flex-wrap: wrap; }
+  .badge {
+    color: var(--badge-fg);
+    font-size: 0.72rem; padding: 2px 8px; border-radius: 999px;
+    font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase;
+  }
+  .badge-linux   { background: var(--badge-linux); }
+  .badge-general { background: var(--badge-general); }
+  .badge-library { background: var(--badge-library); }
+  .badge-web     { background: var(--badge-web); }
+  .badge-cli     { background: var(--badge-cli); }
+  .project p { margin: 0 0 8px; color: var(--muted); font-size: 0.94rem; }
   .project .links a { font-size: 0.88rem; margin-right: 12px; }
+
+  /* Apt section */
+  .apt-section {
+    background: var(--apt-bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 18px 20px;
+  }
+  .apt-section h2 { margin-top: 0; }
+  .apt-section p:last-of-type { margin-bottom: 0; }
+  .apt-section .links a { margin-right: 14px; }
   .links-row a { margin-right: 14px; font-size: 0.95rem; }
-  footer { margin-top: 56px; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--line); padding-top: 14px; }
+  .warn {
+    background: var(--warn-bg); color: var(--warn-fg);
+    border-left: 4px solid var(--warn-line);
+    padding: 12px 16px; border-radius: 4px;
+    font-size: 0.9rem; margin: 16px 0 0;
+  }
+  footer {
+    margin-top: 56px; color: var(--muted); font-size: 0.85rem;
+    border-top: 1px solid var(--line); padding-top: 14px;
+  }
+  ul.bio { margin: 6px 0 0; padding-left: 20px; color: var(--muted); }
+  ul.bio li { margin: 2px 0; }
+  .empty {
+    color: var(--muted); font-style: italic; padding: 16px 0;
+    text-align: center; font-size: 0.95rem;
+  }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ramazan Yavuz",
+  "alternateName": "ra-yavuz",
+  "url": "https://ra-yavuz.github.io/",
+  "sameAs": [
+    "https://github.com/ra-yavuz",
+    "https://ramazan-yavuz.tr"
+  ],
+  "knowsLanguage": ["English", "German", "Turkish"]
+}
+</script>
 </head>
 <body>
 <main>
   <header>
-    <h1>ra-yavuz</h1>
-    <p>Linux tools and software projects.</p>
+    <h1>Ramazan Yavuz</h1>
+    <p class="role">Public projects, independent of any business work.</p>
+    <p class="intro">
+      This is my personal hub for open-source projects I publish on
+      <a href="https://github.com/ra-yavuz">github.com/ra-yavuz</a>.
+      Anything here is something I built, found useful, and decided to share.
+      It is not connected to client work or commercial offerings.
+    </p>
+    <p class="note">
+      For consulting, the broader portfolio, and articles, see
+      <a href="https://ramazan-yavuz.tr">ramazan-yavuz.tr</a>.
+    </p>
   </header>
 
   <h2>Projects</h2>
-  <div class="projects">
-    <div class="project">
-      <h3>inhibit-charge</h3>
-      <p>Park your Linux laptop battery at a target charge level using the kernel's <code>inhibit-charge</code> mode. No trickle cycling, no slow drift.</p>
+  <div class="filter" role="tablist" aria-label="Filter projects by category">
+    <button type="button" class="active" data-filter="all">All <span class="count" data-count="all"></span></button>
+    <button type="button" data-filter="linux">Linux tools <span class="count" data-count="linux"></span></button>
+    <button type="button" data-filter="general">General tools <span class="count" data-count="general"></span></button>
+    <button type="button" data-filter="library">Libraries <span class="count" data-count="library"></span></button>
+    <button type="button" data-filter="web">Web <span class="count" data-count="web"></span></button>
+    <button type="button" data-filter="cli">CLI <span class="count" data-count="cli"></span></button>
+  </div>
+
+  <div class="projects" id="projects">
+    <article class="project" data-categories="linux cli">
+      <header class="row">
+        <h3>inhibit-charge</h3>
+        <span class="badges">
+          <span class="badge badge-linux">Linux</span>
+          <span class="badge badge-cli">CLI</span>
+        </span>
+      </header>
+      <p>
+        Park your Linux laptop battery at a target charge level using the kernel's
+        <code>inhibit-charge</code> mode. Unlike threshold-only tools (TLP, GNOME, KDE),
+        the battery does not trickle-cycle on AC. No slow drift, no repeated mini-cycles.
+      </p>
       <div class="links">
+        <a href="https://ra-yavuz.github.io/inhibit-charge/">project page</a>
         <a href="https://github.com/ra-yavuz/inhibit-charge">source</a>
         <a href="https://github.com/ra-yavuz/inhibit-charge/releases">releases</a>
+        <a href="https://github.com/ra-yavuz/inhibit-charge#install">install</a>
       </div>
-    </div>
+    </article>
   </div>
+  <p class="empty" id="empty" hidden>No projects in this category yet.</p>
 
   <h2>Apt repository</h2>
-  <p>All Debian/Ubuntu packages are published to a single signed apt archive.</p>
-  <div class="links-row">
-    <a href="https://ra-yavuz.github.io/apt/">apt repository</a>
-    <a href="https://github.com/ra-yavuz/apt">apt source repo</a>
-  </div>
+  <section class="apt-section">
+    <p>
+      All Debian and Ubuntu packages from these projects (where applicable)
+      are published to a single signed apt archive at
+      <a href="https://ra-yavuz.github.io/apt/"><strong>ra-yavuz.github.io/apt</strong></a>.
+      Add it to your sources once and you get every published tool with the usual
+      <code>apt install</code> and <code>apt upgrade</code> flow, with GPG-verified
+      signatures on every package.
+    </p>
+    <p>
+      <strong>Why use the apt repository:</strong> automatic updates, signed
+      provenance, no manual <code>.deb</code> downloads, plays nicely with the rest
+      of your system. Recommended for any installation you intend to keep.
+    </p>
+    <p>
+      <strong>Alternative, install directly from GitHub:</strong> every release
+      attaches a prebuilt <code>.deb</code> to the source repository's GitHub
+      Releases page. Useful for one-off installs, testing a specific version,
+      or environments where adding a third-party apt source is not allowed.
+    </p>
+    <div class="links">
+      <a href="https://ra-yavuz.github.io/apt/">apt repository</a>
+      <a href="https://github.com/ra-yavuz/apt">apt source repo</a>
+    </div>
+  </section>
 
-  <h2>Elsewhere</h2>
-  <div class="links-row">
-    <a href="https://github.com/ra-yavuz">github.com/ra-yavuz</a>
+  <h2>About</h2>
+  <ul class="bio">
+    <li>Independent engineer based between Arnsberg, Germany and Antalya, Turkey.</li>
+    <li>Working languages: English, German, Turkish.</li>
+    <li>Public projects (this page) are separate from professional consulting work at <a href="https://ramazan-yavuz.tr">ramazan-yavuz.tr</a>.</li>
+  </ul>
+
+  <h2>Disclaimer</h2>
+  <div class="warn">
+    Every project listed here is provided <strong>as is, without warranty of any kind</strong>.
+    Some projects interact with low-level system interfaces and may affect your
+    hardware. The author is not liable for any damage to hardware, data, or
+    system caused by installing or running these projects. Read each project's
+    README and project page before installing.
   </div>
 
   <footer>
-    Source for this page: <a href="https://github.com/ra-yavuz/ra-yavuz.github.io">github.com/ra-yavuz/ra-yavuz.github.io</a>
+    Source for this page:
+    <a href="https://github.com/ra-yavuz/ra-yavuz.github.io">github.com/ra-yavuz/ra-yavuz.github.io</a>.
+    Profile: <a href="https://github.com/ra-yavuz">github.com/ra-yavuz</a>.
   </footer>
 </main>
+
+<script>
+  // Project filter. No framework, just toggles a class on cards and chips.
+  (function () {
+    var filterButtons = document.querySelectorAll('.filter button');
+    var projects = document.querySelectorAll('#projects .project');
+    var empty = document.getElementById('empty');
+    var counters = document.querySelectorAll('[data-count]');
+
+    function counts() {
+      var c = { all: projects.length };
+      projects.forEach(function (p) {
+        (p.dataset.categories || '').split(/\s+/).forEach(function (cat) {
+          if (!cat) return;
+          c[cat] = (c[cat] || 0) + 1;
+        });
+      });
+      return c;
+    }
+
+    function setCounts() {
+      var c = counts();
+      counters.forEach(function (el) {
+        var key = el.getAttribute('data-count');
+        var n = c[key] || 0;
+        el.textContent = '(' + n + ')';
+      });
+    }
+
+    function applyFilter(name) {
+      var anyVisible = false;
+      projects.forEach(function (p) {
+        var cats = (p.dataset.categories || '').split(/\s+/);
+        var visible = name === 'all' || cats.indexOf(name) !== -1;
+        p.classList.toggle('hidden', !visible);
+        if (visible) anyVisible = true;
+      });
+      empty.hidden = anyVisible;
+    }
+
+    filterButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        filterButtons.forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        applyFilter(btn.getAttribute('data-filter'));
+      });
+    });
+
+    setCounts();
+    applyFilter('all');
+  })();
+</script>
 </body>
 </html>
