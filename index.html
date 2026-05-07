@@ -381,13 +381,33 @@
   <h2>Apt repository</h2>
   <section class="apt-section">
     <p>
-      All Debian and Ubuntu packages from these projects (where applicable)
-      are published to a single signed apt archive at
+      <strong>Every Debian / Ubuntu tool on this page in one place, kept up to date
+      with the rest of your system.</strong>
+      All Debian and Ubuntu packages from these projects (where applicable) are
+      published to a single signed apt archive at
       <a href="https://ra-yavuz.github.io/apt/"><strong>ra-yavuz.github.io/apt</strong></a>.
-      Add it to your sources once and you get every published tool with the usual
-      <code>apt install</code> and <code>apt upgrade</code> flow, with GPG-verified
-      signatures on every package.
+      Add it to your sources once and every tool installs and upgrades with the
+      normal <code>apt install</code> / <code>apt upgrade</code> commands you already
+      use. New releases land in the repo automatically, GPG-signed, no separate
+      download steps.
     </p>
+
+    <h3>One line setup + install</h3>
+    <p>
+      Sets up the signed repo if not already added, refreshes the package index,
+      and installs the package. Idempotent, safe to re-run. Replace
+      <code>&lt;package&gt;</code> with any of <code>inhibit-charge</code>,
+      <code>herald</code>, <code>meowtrics</code>, <code>lillycoder</code>,
+      <code>hydra-llm</code>:
+    </p>
+    <pre><code>sudo bash -c 'set -e; install -m 0755 -d /etc/apt/keyrings &amp;&amp; curl -fsSL https://ra-yavuz.github.io/apt/pubkey.gpg -o /etc/apt/keyrings/ra-yavuz.gpg &amp;&amp; echo "deb [signed-by=/etc/apt/keyrings/ra-yavuz.gpg] https://ra-yavuz.github.io/apt stable main" &gt; /etc/apt/sources.list.d/ra-yavuz.list &amp;&amp; apt update &amp;&amp; apt install -y &lt;package&gt;'</code></pre>
+    <p>
+      Once the repo is set up, future installs and upgrades are just
+      <code>sudo apt update &amp;&amp; sudo apt install &lt;package&gt;</code>
+      and <code>sudo apt upgrade</code>. The <code>sudo apt update</code> step is
+      required: without it apt will not see new packages or new versions.
+    </p>
+
     <p>
       <strong>Why use the apt repository:</strong> automatic updates, signed
       provenance, no manual <code>.deb</code> downloads, plays nicely with the rest
