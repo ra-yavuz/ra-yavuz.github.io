@@ -433,6 +433,18 @@
     </p>
 
     <p>
+      <strong>Tested on Ubuntu (Linux only).</strong> The packages should work on
+      any recent Debian / Ubuntu derivative and on <strong>WSL2</strong> Ubuntu
+      (it is a Linux distro), with the caveat that projects depending on hardware
+      sysfs (<code>inhibit-charge</code>) or a Linux desktop tray
+      (<code>meowtrics</code>) cannot work inside WSL2 in any meaningful way.
+      <strong>macOS support is per-project</strong>: <code>hydra-llm</code>
+      runs under Docker Desktop and <code>lillycoder</code> installs from
+      source via <code>pip</code>; the rest are Linux-only by design. Each
+      project page has its own <em>Platform support</em> section.
+    </p>
+
+    <p>
       <strong>Why use the apt repository:</strong> automatic updates, signed
       provenance, no manual <code>.deb</code> downloads, plays nicely with the rest
       of your system. Recommended for any installation you intend to keep.
