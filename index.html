@@ -338,17 +338,20 @@
           </span>
         </header>
         <p>
-          <strong>Type <code>rag: &lt;question&gt;</code> in Claude Code. Get a retrieval-augmented answer.</strong>
+          <strong>apt install. Type <code>rag: &lt;q&gt;</code> in Claude Code. Done.</strong>
           A <code>UserPromptSubmit</code> hook for Anthropic's Claude Code that does
-          keyword-triggered local RAG: the user types the trigger, the hook walks up
-          from cwd, finds an indexed folder, embeds the query, retrieves the top-K
-          chunks from a per-folder LanceDB index, and prepends them to the prompt
-          before Claude sees it. Cheap, deterministic, local-first. Unlike
-          MCP-driven local RAG, the model does not decide when to retrieve, so
-          there is no "why didn't it use the tool that time" debugging and zero
-          token overhead on prompts that do not start with the trigger. Pluggable
-          embedders (fastembed, OpenAI-compatible, hydra-llm interop). Pairs with
-          <strong>hydra-llm</strong> for embedder + index reuse.
+          keyword-triggered local RAG. The apt package wires the hook into Claude
+          Code automatically (system-wide, every user) by merging an entry into
+          <code>/etc/claude-code/managed-settings.json</code>. The first
+          <code>rag:</code> in any project folder fork-detaches a background
+          indexer; the next <code>rag:</code> retrieves the top relevant chunks
+          from a per-folder LanceDB index and prepends them to the prompt before
+          Claude sees it. Auto-index has hard refusals on <code>$HOME</code> and
+          system paths, and a 20k-file / 500MB cap. Unlike MCP-driven local RAG,
+          the model does not decide when to retrieve: zero token overhead on
+          non-RAG prompts, no debugging "why didn't it use the tool that time".
+          Pluggable embedders (fastembed, OpenAI-compatible, hydra-llm interop).
+          Pairs with <strong>hydra-llm</strong> for embedder + index reuse.
         </p>
         <div class="links">
           <a href="https://ra-yavuz.github.io/claude-rag-hook/">project page</a>
