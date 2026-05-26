@@ -469,6 +469,33 @@
       <picture><source srcset="logo-meowtrics.webp" type="image/webp"><img class="card-art" src="logo-meowtrics.png" alt="meowtrics logo"></picture>
     </article>
 
+    <article class="project" data-categories="linux">
+      <div class="body">
+        <header class="row">
+          <h3>portunus-ovpn</h3>
+          <span class="badges">
+            <span class="badge badge-linux">Linux</span>
+          </span>
+        </header>
+        <p>
+          <strong>Native KDE Plasma 6 panel widget for switching OpenVPN connections.</strong>
+          Import, edit, remove and toggle .ovpn profiles from your panel. One VPN
+          active at a time by default; flip a setting for multi-active (intended
+          for split-tunnel combos). Per-connection remember-passphrase backed by
+          NetworkManager secret flags and KWallet. No second VPN daemon, no
+          third-party PPA: just nmcli + NetworkManager + KWallet, already on
+          every KDE box. Named after Portunus, the Roman god of keys and gates.
+        </p>
+        <div class="links">
+          <a href="https://ra-yavuz.github.io/portunus-ovpn/">project page</a>
+          <a href="https://github.com/ra-yavuz/portunus-ovpn">source</a>
+          <a href="https://github.com/ra-yavuz/portunus-ovpn/releases">releases</a>
+          <a href="https://github.com/ra-yavuz/portunus-ovpn#install">install</a>
+        </div>
+      </div>
+      <picture><source srcset="logo-portunus-ovpn.webp" type="image/webp"><img class="card-art" src="logo-portunus-ovpn.png" alt="portunus-ovpn logo"></picture>
+    </article>
+
 
   </div>
   <p class="empty" id="empty" hidden>No projects in this category yet.</p>
@@ -493,7 +520,8 @@
       and installs the package. Idempotent, safe to re-run. Replace
       <code>&lt;package&gt;</code> with any of <code>inhibit-charge</code>,
       <code>herald</code>, <code>meowtrics</code>, <code>lillycoder</code>,
-      <code>hydra-llm</code>, <code>claude-rag-hook</code>:
+      <code>hydra-llm</code>, <code>claude-rag-hook</code>,
+      <code>portunus-ovpn</code>:
     </p>
     <pre><code>sudo bash -c 'set -e; install -m 0755 -d /etc/apt/keyrings &amp;&amp; curl -fsSL https://ra-yavuz.github.io/apt/pubkey.gpg -o /etc/apt/keyrings/ra-yavuz.gpg &amp;&amp; echo "deb [signed-by=/etc/apt/keyrings/ra-yavuz.gpg] https://ra-yavuz.github.io/apt stable main" &gt; /etc/apt/sources.list.d/ra-yavuz.list &amp;&amp; apt update &amp;&amp; apt install -y &lt;package&gt;'</code></pre>
     <p>
