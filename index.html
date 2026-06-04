@@ -275,14 +275,14 @@
           </span>
         </header>
         <p>
-          <strong>Now Claude Code talks back.</strong> Speech-out for Claude
-          Code, paired with the built-in <code>/voice</code> speech-in: turn
-          <code>/voice</code> on and Claude reads its replies aloud; turn it off
-          and you are silent again. Two modes: a Stop hook that speaks every
-          reply, or a <code>speak</code> skill that lets Claude voice only
-          deliberate notifications. Local neural TTS (Kokoro for natural English,
-          Piper for German, Turkish, and more) runs in Docker, so nothing goes to
-          the cloud and there are no API keys. Install with
+          <strong>Let Claude Code decide what to say out loud.</strong> Most
+          "speak Claude aloud" tools read every reply at you. This one leads with
+          a <code>speak</code> skill that lets Claude voice only what is worth
+          hearing: a "build is done", a heads-up while you look away, a shoutout.
+          A speak-everything Stop hook (gated on <code>/voice</code>) is included
+          too, but the deliberate skill is the point. Local neural TTS (Kokoro for
+          natural English, Piper for German, Turkish, and more) runs in Docker, so
+          nothing goes to the cloud and there are no API keys. Install with
           <code>npm install -g claude-can-speak</code>.
         </p>
         <div class="links">
