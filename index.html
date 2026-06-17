@@ -342,14 +342,14 @@
           channels.</strong> ntfy is effortless because its topic name is the only
           gate, which is also why its topics are effectively public. doublethink
           keeps the minutes-to-set-up ergonomics and adds what ntfy omits:
-          identity and private channels. A private channel admits only
-          authenticated, authorised parties (Ed25519 challenge, no reusable
-          token), and its payloads are end-to-end encrypted between the paired
-          peers, so the broker operator never sees the plaintext. Knowing a
-          channel name grants no access. Pairing is man-in-the-middle resistant
-          (single-use codes plus an out-of-band short authentication string).
-          Bidirectional, asynchronous, streaming. Opt-in plaintext public topics
-          too. Cross-platform: run it in Docker or as a single native binary.
+          genuinely private channels. Creating one is self-service (one request,
+          no operator) and returns a high-entropy shared secret. That secret is the
+          gate: whoever holds it can join the channel, no one else can, and the
+          broker never sees it, so it cannot read your messages, which are
+          end-to-end encrypted between the parties who share the secret. Knowing a
+          channel name grants no access. Bidirectional, asynchronous, streaming.
+          Opt-in plaintext public topics too. Cross-platform: run it in Docker or
+          as a single native binary.
         </p>
         <div class="links">
           <a href="https://ra-yavuz.github.io/doublethink/">project page</a>
