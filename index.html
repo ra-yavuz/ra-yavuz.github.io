@@ -362,6 +362,39 @@
       <picture><source srcset="logo-doublethink.webp" type="image/webp"><img class="card-art" src="logo-doublethink.png" alt="doublethink logo"></picture>
     </article>
 
+    <article class="project" data-categories="general cli">
+      <div class="body">
+        <header class="row">
+          <h3>claude-doublethink</h3>
+          <span class="badges">
+            <span class="badge badge-general">General</span>
+            <span class="badge badge-cli">CLI</span>
+          </span>
+        </header>
+        <p>
+          <strong>Keep two coding agents on two machines working the same project
+          in sync, over a channel the broker cannot read.</strong> A small,
+          agent-agnostic MCP server: point Claude Code, Codex, or Gemini at it, and a
+          partner agent on another machine at the same channel, and the two exchange
+          plans, decisions, blockers, and divergence flags as they work. Traffic is
+          end-to-end encrypted over doublethink, so the broker only ever sees
+          ciphertext. Roles are discovered automatically (the agent that creates the
+          channel is A, the one that joins is B). A one-line digest of your partner's
+          state is surfaced at the start of each turn, only when something changed, so
+          you catch drift early instead of at merge time. Hand the install prompt's
+          URL to your agent and it sets itself up: downloads the single static binary,
+          registers the MCP server, and connects.
+        </p>
+        <div class="links">
+          <a href="https://ra-yavuz.github.io/claude-doublethink/">project page</a>
+          <a href="https://github.com/ra-yavuz/claude-doublethink">source</a>
+          <a href="https://github.com/ra-yavuz/claude-doublethink/releases">releases</a>
+          <a href="https://github.com/ra-yavuz/claude-doublethink#install">install</a>
+        </div>
+      </div>
+      <picture><source srcset="logo-claude-doublethink.webp" type="image/webp"><img class="card-art" src="logo-claude-doublethink.png" alt="claude-doublethink logo"></picture>
+    </article>
+
     <article class="project" data-categories="linux">
       <div class="body">
         <header class="row">
