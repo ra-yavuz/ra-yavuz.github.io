@@ -216,6 +216,15 @@
     color: var(--muted); font-style: italic; padding: 16px 0;
     text-align: center; font-size: 0.95rem;
   }
+
+        /* A quiet link to support the author's free projects. */
+        a.sponsor-link{display:inline-flex;align-items:center;gap:7px;min-height:44px;color:var(--muted);font-family:inherit;font-size:.85rem;text-decoration:none}
+        a.sponsor-link svg{flex:none}
+        a.sponsor-link:hover{text-decoration:underline;text-underline-offset:4px}
+        a.sponsor-link:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+        .footer-links{flex-wrap:wrap;align-items:center}
+        .nav-menu a.sponsor-link{color:var(--muted)}
+
 </style>
 <script type="application/ld+json">
 {
@@ -245,6 +254,7 @@
           Anything here is something I built, found useful, and decided to share.
           It is not connected to client work or commercial offerings.
         </p>
+        <p class="note"><a class="sponsor-link" href="https://github.com/sponsors/ra-yavuz" target="_blank" rel="noopener noreferrer" title="Opens GitHub Sponsors in a new tab"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10m3-8h-4a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4H9"/></svg><span>Support my free projects</span></a></p>
         <p class="note">
           For consulting, the broader portfolio, and articles, see
           <a href="https://ramazan-yavuz.tr">ramazan-yavuz.tr</a>.
@@ -795,16 +805,10 @@
     </div>
   </section>
 
-  <section id="sponsor-section" hidden>
+  <section id="sponsor-section">
     <h2>Support</h2>
-    <p>
-      If any of the projects here have been useful to you and you would
-      like to chip in, GitHub Sponsors is the cleanest way: zero platform
-      fee, recurring or one-off, fully optional.
-    </p>
-    <div class="links-row">
-      <a href="https://github.com/sponsors/ra-yavuz">github.com/sponsors/ra-yavuz</a>
-    </div>
+    <p>I love making these tools available for free. I also run community projects using my own hosting, servers, and storage. If something here has been useful to you, I would be grateful for your support. Thank you for helping me keep it going.</p>
+    <div class="links-row"><a class="sponsor-link" href="https://github.com/sponsors/ra-yavuz" target="_blank" rel="noopener noreferrer" title="Opens GitHub Sponsors in a new tab"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10m3-8h-4a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4H9"/></svg><span>Support my free projects</span></a></div>
   </section>
 
   <h2>About</h2>
@@ -886,21 +890,6 @@
     applyFilter('all');
   })();
 
-  // Reveal the "Support" section once GitHub Sponsors is actually
-  // approved and live. We can't reliably auto-detect this from the
-  // browser (CORS blocks the most direct probes; shields.io reports 0
-  // even for unapproved profiles). So we read a tiny static JSON flag
-  // that gets flipped manually the moment the approval email arrives.
-  (function () {
-    var section = document.getElementById('sponsor-section');
-    if (!section) return;
-    fetch('sponsors.json', { cache: 'no-store' })
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (cfg) {
-        if (cfg && cfg.active === true) section.hidden = false;
-      })
-      .catch(function () { /* leave hidden */ });
-  })();
 </script>
 </body>
 </html>
